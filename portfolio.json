@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "name": "nexus-console-ryan-vo",
+  "owner": "A220man",
+  "email": "ryandtvo@gmail.com",
+  "domain": "AI/ML developer tools",
+  "summary": "Work in progress: nexus-console-ryan-vo",
+  "workflows": [
+    "Contact and company management with AI enrichment from multiple data sources",
+    "Opportunity pipeline management with predictive scoring",
+    "Configurable LLM provider integration for enhanced data enrichment (OpenAI-compatible, Anthropic, Gemini, Ollama)"
+  ],
+  "auth": "oidc-keycloak-saml-broker",
+  "llm_providers": [
+    "openai-compatible",
+    "anthropic",
+    "gemini",
+    "ollama"
+  ],
+  "status": "work-in-progress"
+}
