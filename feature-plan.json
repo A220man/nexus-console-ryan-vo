@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "current_feature": "fastapi-react-skeleton",
+  "current_feature": "core-domain-model",
   "features": [
     {
       "id": "fastapi-react-skeleton",
@@ -35,14 +35,33 @@
     {
       "id": "core-domain-model",
       "title": "Core domain model for AI-powered CRM entities",
-      "status": "planned",
+      "status": "in_progress",
       "acceptance": [
         "SQLAlchemy models for Contacts, Companies, Opportunities",
         "Pydantic schemas for API validation",
         "Database migrations with Alembic",
         "CRUD API endpoints"
       ],
-      "implementation": [],
+      "implementation": [
+        "backend/app/models/base.py",
+        "backend/app/models/contact.py",
+        "backend/app/models/company.py",
+        "backend/app/models/opportunity.py",
+        "backend/app/models/__init__.py",
+        "backend/app/schemas/contact.py",
+        "backend/app/schemas/company.py",
+        "backend/app/schemas/opportunity.py",
+        "backend/app/schemas/__init__.py",
+        "backend/app/core/database.py",
+        "backend/app/core/__init__.py",
+        "backend/app/api/contacts.py",
+        "backend/app/api/companies.py",
+        "backend/app/api/opportunities.py",
+        "backend/app/api/__init__.py",
+        "backend/app/main.py",
+        "backend/alembic.ini",
+        "backend/alembic/env.py"
+      ],
       "tests": []
     },
     {
