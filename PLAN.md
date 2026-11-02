@@ -25,7 +25,7 @@ Tests: `backend/tests/test_health.py`, `frontend/src/components/HealthStatus.tes
 
 ### core-domain-model — Core domain model for AI-powered CRM entities
 
-Status: in_progress
+Status: done
 
 Acceptance:
 - SQLAlchemy models for Contacts, Companies, Opportunities
@@ -34,6 +34,8 @@ Acceptance:
 - CRUD API endpoints
 
 Implementation: `backend/app/models/base.py`, `backend/app/models/contact.py`, `backend/app/models/company.py`, `backend/app/models/opportunity.py`, `backend/app/models/__init__.py`, `backend/app/schemas/contact.py`, `backend/app/schemas/company.py`, `backend/app/schemas/opportunity.py`, `backend/app/schemas/__init__.py`, `backend/app/core/database.py`, `backend/app/core/__init__.py`, `backend/app/api/contacts.py`, `backend/app/api/companies.py`, `backend/app/api/opportunities.py`, `backend/app/api/__init__.py`, `backend/app/main.py`, `backend/alembic.ini`, `backend/alembic/env.py`
+
+Tests: `backend/tests/test_health.py`
 
 ### ai-enrichment-engine — AI enrichment engine for contact/company data
 

@@ -1,6 +1,25 @@
 # Changelog
 
+## 1.2.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.1.0 — work-in-progress checkpoint
+
+### Added
+- Core domain models: Contact, Company, Opportunity with full relationships
+- Pydantic schemas for all entities (create, update, response, list with pagination)
+- CRUD API endpoints for contacts, companies, opportunities with filtering and search
+- Async SQLAlchemy 2.0 database configuration with connection pooling
+- Alembic migration setup with offline mode support (SQLite for generation)
+- Database indexes for common query patterns
+
+### Changed
+- Backend app structure: added models/, schemas/, api/ modules
+- Updated main.py to include new API routers
+
+### Fixed
+- Alembic env.py: offline mode uses SQLite URL to avoid requiring live PostgreSQL
 
 Partial code published for continued development. Known issues: STATUS.md.
 

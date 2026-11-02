@@ -35,7 +35,7 @@
     {
       "id": "core-domain-model",
       "title": "Core domain model for AI-powered CRM entities",
-      "status": "in_progress",
+      "status": "done",
       "acceptance": [
         "SQLAlchemy models for Contacts, Companies, Opportunities",
         "Pydantic schemas for API validation",
@@ -62,7 +62,9 @@
         "backend/alembic.ini",
         "backend/alembic/env.py"
       ],
-      "tests": []
+      "tests": [
+        "backend/tests/test_health.py"
+      ]
     },
     {
       "id": "ai-enrichment-engine",
