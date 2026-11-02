@@ -42,6 +42,9 @@ def run_migrations_offline() -> None:
 
     """
     url = config.get_main_option("sqlalchemy.url")
+    # Use SQLite for offline generation to avoid needing a live database
+    if url.startswith("postgresql"):
+        url = "sqlite://"
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -78,7 +81,6 @@ def do_run_migrations(connection):
 
     with context.begin_transaction():
         context.run_migrations()
-
 
 if context.is_offline_mode():
     run_migrations_offline()
