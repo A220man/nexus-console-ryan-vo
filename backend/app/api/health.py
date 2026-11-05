@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 from app.core.config import settings
+from app.core.database import get_db
 
 
 router = APIRouter()
@@ -26,7 +27,15 @@ async def health_check():
     )
 
 
-@router.get("/health/db")
-async def health_check_db():
-    # This will be implemented when database is configured
-    return {"status": "not_configured", "message": "Database not yet configured"}
+class DatabaseHealthResponse(BaseModel):
+    status: str
+    message: Optional[str] = None
+
+
+@router.get("/health/db", response_model=DatabaseHealthResponse)
+async def health_check_db(db: AsyncSession = Depends(get_db)):
+    try:
+        await db.execute(text("SELECT 1"))
+        return DatabaseHealthResponse(status="healthy", message="Database connection successful")
+    except Exception as e:
+        return DatabaseHealthResponse(status="unhealthy", message=f"Database connection failed: {str(e)}")

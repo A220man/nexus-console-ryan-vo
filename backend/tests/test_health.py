@@ -13,8 +13,9 @@ async def test_health_check(async_client: AsyncClient):
 
 
 @pytest.mark.asyncio
-async def test_health_check_db_not_configured(async_client: AsyncClient):
+async def test_health_check_db(async_client: AsyncClient):
     response = await async_client.get("/api/health/db")
     assert response.status_code == 200
     data = response.json()
-    assert data["status"] == "not_configured"
+    assert data["status"] in ("healthy", "unhealthy")
+    assert "message" in data
