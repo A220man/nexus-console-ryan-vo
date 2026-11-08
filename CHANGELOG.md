@@ -1,9 +1,28 @@
 # Changelog
 
-## 1.3.0 — work-in-progress checkpoint
+## 1.4.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
 
+## 1.3.0 — work-in-progress checkpoint
+
+### Added
+- AI enrichment engine with deterministic offline provider for contacts and companies
+- LLM enrichment provider framework (OpenAI-compatible, Anthropic, Gemini)
+- Enrichment job queue with status tracking (pending, running, completed, failed)
+- REST API endpoints for enrichment jobs (create, bulk create, list, get, run, apply, preview)
+- Comprehensive test suite for enrichment (10 tests passing)
+
+### Fixed
+- Fixed `test_preview_enrichment_company` - offline provider now always infers name/domain from domain field
+- Offline enrichment returns inferred suggestions regardless of input data completeness
+
+### Known Issues
+- Test isolation issues in contact/company/opportunity tests (database not cleaned between tests)
+- Pydantic Url type serialization warnings
+- SQLAlchemy connection pool warnings
+
+Partial code published for continued development. Known issues: STATUS.md.
 ## 1.2.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.

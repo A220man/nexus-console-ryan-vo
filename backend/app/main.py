@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from app.core.config import settings
 from app.core.database import init_db, close_db
-from app.api import health, contacts, companies, opportunities
+from app.api import health, contacts, companies, opportunities, enrichment
 
 
 @asynccontextmanager
@@ -37,6 +37,7 @@ def create_app() -> FastAPI:
     app.include_router(contacts.router, prefix="/api", tags=["contacts"])
     app.include_router(companies.router, prefix="/api", tags=["companies"])
     app.include_router(opportunities.router, prefix="/api", tags=["opportunities"])
+    app.include_router(enrichment.router, prefix="/api", tags=["enrichment"])
     
     return app
 

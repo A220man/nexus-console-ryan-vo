@@ -20,6 +20,16 @@ from app.schemas.opportunity import (
     OpportunityResponse,
     OpportunityListResponse,
 )
+from app.schemas.enrichment import (
+    EnrichmentJobCreate,
+    EnrichmentJobResponse,
+    EnrichmentJobListResponse,
+    EnrichmentResult,
+    BulkEnrichmentRequest,
+    EnrichmentProvider,
+    EnrichmentTargetType,
+    EnrichmentStatus,
+)
 
 __all__ = [
     "ContactBase",
@@ -38,4 +48,12 @@ __all__ = [
     "OpportunityUpdate",
     "OpportunityResponse",
     "OpportunityListResponse",
+    "EnrichmentJobCreate",
+    "EnrichmentJobResponse",
+    "EnrichmentJobListResponse",
+    "EnrichmentResult",
+    "BulkEnrichmentRequest",
+    "EnrichmentProvider",
+    "EnrichmentTargetType",
+    "EnrichmentStatus",
 ]
