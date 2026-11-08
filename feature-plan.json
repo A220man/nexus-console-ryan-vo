@@ -1,107 +1,13 @@
 {
   "schema_version": 1,
-  "current_feature": "core-domain-model",
+  "current_feature": "continue-implementation",
   "features": [
     {
-      "id": "fastapi-react-skeleton",
-      "title": "FastAPI + React skeleton with health check",
-      "status": "done",
+      "id": "continue-implementation",
+      "title": "Continue implementation and resolve known failures",
+      "status": "in_progress",
       "acceptance": [
-        "FastAPI backend runs on port 8000 with /health endpoint",
-        "React + TypeScript + Vite frontend runs on port 5173",
-        "Frontend displays backend health status",
-        "Dockerfiles for both services",
-        "docker-compose.yml with both services"
-      ],
-      "implementation": [
-        "backend/app/main.py",
-        "backend/app/core/config.py",
-        "backend/app/api/health.py",
-        "backend/Dockerfile",
-        "backend/requirements.txt",
-        "frontend/src/main.tsx",
-        "frontend/src/App.tsx",
-        "frontend/src/components/HealthStatus.tsx",
-        "frontend/src/hooks/useHealth.ts",
-        "frontend/src/api/client.ts",
-        "frontend/Dockerfile",
-        "docker-compose.yml"
-      ],
-      "tests": [
-        "backend/tests/test_health.py",
-        "frontend/src/components/HealthStatus.test.tsx"
-      ]
-    },
-    {
-      "id": "core-domain-model",
-      "title": "Core domain model for AI-powered CRM entities",
-      "status": "done",
-      "acceptance": [
-        "SQLAlchemy models for Contacts, Companies, Opportunities",
-        "Pydantic schemas for API validation",
-        "Database migrations with Alembic",
-        "CRUD API endpoints"
-      ],
-      "implementation": [
-        "backend/app/models/base.py",
-        "backend/app/models/contact.py",
-        "backend/app/models/company.py",
-        "backend/app/models/opportunity.py",
-        "backend/app/models/__init__.py",
-        "backend/app/schemas/contact.py",
-        "backend/app/schemas/company.py",
-        "backend/app/schemas/opportunity.py",
-        "backend/app/schemas/__init__.py",
-        "backend/app/core/database.py",
-        "backend/app/core/__init__.py",
-        "backend/app/api/contacts.py",
-        "backend/app/api/companies.py",
-        "backend/app/api/opportunities.py",
-        "backend/app/api/__init__.py",
-        "backend/app/main.py",
-        "backend/alembic.ini",
-        "backend/alembic/env.py"
-      ],
-      "tests": [
-        "backend/tests/test_health.py"
-      ]
-    },
-    {
-      "id": "ai-enrichment-engine",
-      "title": "AI enrichment engine for contact/company data",
-      "status": "planned",
-      "acceptance": [
-        "Deterministic offline enrichment (no LLM required)",
-        "Optional LLM enrichment with OpenAI-compatible/Anthropic/Gemini adapters",
-        "Provider-agnostic configuration",
-        "Enrichment job queue and status tracking"
-      ],
-      "implementation": [],
-      "tests": []
-    },
-    {
-      "id": "auth-oidc-keycloak",
-      "title": "OIDC authentication with Keycloak",
-      "status": "planned",
-      "acceptance": [
-        "Keycloak realm configuration",
-        "Backend token validation with PyJWT",
-        "Frontend PKCE login flow",
-        "Role-based access control (viewer/operator/admin)"
-      ],
-      "implementation": [],
-      "tests": []
-    },
-    {
-      "id": "frontend-dashboard",
-      "title": "React dashboard with CRUD workflows",
-      "status": "planned",
-      "acceptance": [
-        "Contact list with search/filter/pagination",
-        "Contact create/edit/detail views",
-        "Company and Opportunity views",
-        "Loading/error/empty states",
-        "Export to CSV"
+        "Run checks, fix failures, and implement the next planned feature"
       ],
       "implementation": [],
       "tests": []
