@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl
-from typing import Optional
+from typing import Optional, Union
 from datetime import datetime
 
 
@@ -12,8 +12,8 @@ class CompanyBase(BaseModel):
     description: Optional[str] = None
     address: Optional[str] = None
     phone: Optional[str] = Field(None, max_length=50)
-    linkedin_url: Optional[HttpUrl] = None
-    website: Optional[HttpUrl] = None
+    linkedin_url: Optional[Union[HttpUrl, str]] = None
+    website: Optional[Union[HttpUrl, str]] = None
 
 
 class CompanyCreate(CompanyBase):
@@ -33,10 +33,20 @@ class CompanyUpdate(BaseModel):
     website: Optional[HttpUrl] = None
 
 
-class CompanyResponse(CompanyBase):
+class CompanyResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+    name: str
+    domain: Optional[str] = None
+    industry: Optional[str] = None
+    size: Optional[str] = None
+    annual_revenue: Optional[int] = None
+    description: Optional[str] = None
+    address: Optional[str] = None
+    phone: Optional[str] = None
+    linkedin_url: Optional[str] = None
+    website: Optional[str] = None
     created_at: datetime
     updated_at: datetime
 

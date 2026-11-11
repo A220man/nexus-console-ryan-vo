@@ -29,10 +29,18 @@ class ContactUpdate(BaseModel):
     company_id: Optional[int] = None
 
 
-class ContactResponse(ContactBase):
+class ContactResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+    first_name: str
+    last_name: str
+    email: str
+    phone: Optional[str] = None
+    title: Optional[str] = None
+    linkedin_url: Optional[str] = None
+    notes: Optional[str] = None
+    company_id: Optional[int] = None
     created_at: datetime
     updated_at: datetime
 

@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
+from sqlalchemy.exc import IntegrityError
 from typing import Optional
 
 from app.core.database import get_db
@@ -61,9 +62,19 @@ async def get_company(company_id: int, db: AsyncSession = Depends(get_db)):
 
 @router.post("/companies", response_model=CompanyResponse, status_code=status.HTTP_201_CREATED)
 async def create_company(company_in: CompanyCreate, db: AsyncSession = Depends(get_db)):
-    company = Company(**company_in.model_dump())
+    data = company_in.model_dump()
+    # Convert HttpUrl to string for SQLite compatibility
+    if data.get("linkedin_url"):
+        data["linkedin_url"] = str(data["linkedin_url"])
+    if data.get("website"):
+        data["website"] = str(data["website"])
+    company = Company(**data)
     db.add(company)
-    await db.commit()
+    try:
+        await db.commit()
+    except IntegrityError:
+        await db.rollback()
+        raise HTTPException(status_code=422, detail="Company with this domain already exists")
     await db.refresh(company)
     return CompanyResponse.model_validate(company)
 
@@ -74,7 +85,14 @@ async def update_company(company_id: int, company_in: CompanyUpdate, db: AsyncSe
     if not company:
         raise HTTPException(status_code=404, detail="Company not found")
 
-    for field, value in company_in.model_dump(exclude_unset=True).items():
+    data = company_in.model_dump(exclude_unset=True)
+    # Convert HttpUrl to string for SQLite compatibility
+    if data.get("linkedin_url"):
+        data["linkedin_url"] = str(data["linkedin_url"])
+    if data.get("website"):
+        data["website"] = str(data["website"])
+
+    for field, value in data.items():
         setattr(company, field, value)
 
     await db.commit()
