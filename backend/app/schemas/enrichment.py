@@ -77,7 +77,7 @@ class EnrichmentResult(BaseModel):
     email: Optional[str] = None
     phone: Optional[str] = None
     title: Optional[str] = None
-    linkedin_url: Optional[HttpUrl] = None
+    linkedin_url: Optional[str] = None
     notes: Optional[str] = None
     
     # Company fields
@@ -89,8 +89,8 @@ class EnrichmentResult(BaseModel):
     description: Optional[str] = None
     address: Optional[str] = None
     phone: Optional[str] = None
-    linkedin_url: Optional[HttpUrl] = None
-    website: Optional[HttpUrl] = None
+    linkedin_url: Optional[str] = None
+    website: Optional[str] = None
     
     # Metadata
     confidence_score: Optional[float] = Field(None, ge=0.0, le=1.0)

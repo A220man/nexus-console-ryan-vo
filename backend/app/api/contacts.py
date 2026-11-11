@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
+from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
 
 from app.core.database import get_db
@@ -63,9 +64,13 @@ async def get_contact(contact_id: int, db: AsyncSession = Depends(get_db)):
 
 @router.post("/contacts", response_model=ContactResponse, status_code=status.HTTP_201_CREATED)
 async def create_contact(contact_in: ContactCreate, db: AsyncSession = Depends(get_db)):
-    contact = Contact(**contact_in.model_dump())
+    contact = Contact(**contact_in.model_dump(mode='python'))
     db.add(contact)
-    await db.commit()
+    try:
+        await db.commit()
+    except IntegrityError:
+        await db.rollback()
+        raise HTTPException(status_code=422, detail="Contact with this email already exists")
     await db.refresh(contact)
     return ContactResponse.model_validate(contact)
 
@@ -76,7 +81,7 @@ async def update_contact(contact_id: int, contact_in: ContactUpdate, db: AsyncSe
     if not contact:
         raise HTTPException(status_code=404, detail="Contact not found")
 
-    for field, value in contact_in.model_dump(exclude_unset=True).items():
+    for field, value in contact_in.model_dump(exclude_unset=True, mode='python').items():
         setattr(contact, field, value)
 
     await db.commit()

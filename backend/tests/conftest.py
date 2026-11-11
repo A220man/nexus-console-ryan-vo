@@ -35,16 +35,27 @@ async def override_get_db():
 async def app():
     app = create_app()
     app.dependency_overrides[get_db] = override_get_db
-    
+
     # Create tables
     async with test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    
+
     yield app
-    
+
     # Cleanup
     async with test_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
+
+
+@pytest.fixture(scope="function", autouse=True)
+async def clean_db():
+    """Clean database between tests."""
+    yield
+    async with test_engine.begin() as conn:
+        # Delete all data from tables in reverse order of dependencies
+        for table in reversed(Base.metadata.sorted_tables):
+            await conn.execute(table.delete())
+        await conn.commit()
 
 
 @pytest.fixture(scope="function")
