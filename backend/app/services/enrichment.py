@@ -3,7 +3,7 @@ import re
 import hashlib
 from abc import ABC, abstractmethod
 from typing import Optional, Dict, Any, List
-from datetime import datetime
+from datetime import datetime, timezone
 from dataclasses import dataclass
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -528,7 +528,7 @@ class EnrichmentService:
         
         # Update status to running
         job.status = EnrichmentStatus.RUNNING
-        job.started_at = datetime.utcnow()
+        job.started_at = datetime.now(timezone.utc)
         await db.commit()
         
         try:
@@ -549,12 +549,12 @@ class EnrichmentService:
             # Save result
             job.result_data = json.dumps(result.model_dump(mode="json"))
             job.status = EnrichmentStatus.COMPLETED
-            job.completed_at = datetime.utcnow()
+            job.completed_at = datetime.now(timezone.utc)
             
         except Exception as e:
             job.status = EnrichmentStatus.FAILED
             job.error_message = str(e)
-            job.completed_at = datetime.utcnow()
+            job.completed_at = datetime.now(timezone.utc)
         
         await db.commit()
         await db.refresh(job)
