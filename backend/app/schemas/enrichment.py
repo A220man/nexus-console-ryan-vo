@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict, HttpUrl, field_validator
 from typing import Optional, Dict, Any, List
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 
 
@@ -95,7 +95,7 @@ class EnrichmentResult(BaseModel):
     # Metadata
     confidence_score: Optional[float] = Field(None, ge=0.0, le=1.0)
     sources: List[str] = []
-    enriched_at: datetime = Field(default_factory=datetime.utcnow)
+    enriched_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     provider: EnrichmentProvider = EnrichmentProvider.OFFLINE
 
 
