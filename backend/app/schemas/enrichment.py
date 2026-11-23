@@ -75,9 +75,9 @@ class EnrichmentResult(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     email: Optional[str] = None
-    phone: Optional[str] = None
+    phone: Optional[str] = None  # Contact's phone
     title: Optional[str] = None
-    linkedin_url: Optional[str] = None
+    linkedin_url: Optional[str] = None  # Contact's LinkedIn URL
     notes: Optional[str] = None
     
     # Company fields
@@ -88,8 +88,6 @@ class EnrichmentResult(BaseModel):
     annual_revenue: Optional[int] = None
     description: Optional[str] = None
     address: Optional[str] = None
-    phone: Optional[str] = None
-    linkedin_url: Optional[str] = None
     website: Optional[str] = None
     
     # Metadata
