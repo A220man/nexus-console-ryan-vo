@@ -29,8 +29,8 @@ class CompanyUpdate(BaseModel):
     description: Optional[str] = None
     address: Optional[str] = None
     phone: Optional[str] = Field(None, max_length=50)
-    linkedin_url: Optional[HttpUrl] = None
-    website: Optional[HttpUrl] = None
+    linkedin_url: Optional[Union[HttpUrl, str]] = None
+    website: Optional[Union[HttpUrl, str]] = None
 
 
 class CompanyResponse(BaseModel):
