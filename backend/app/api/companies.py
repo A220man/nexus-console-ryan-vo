@@ -63,11 +63,6 @@ async def get_company(company_id: int, db: AsyncSession = Depends(get_db)):
 @router.post("/companies", response_model=CompanyResponse, status_code=status.HTTP_201_CREATED)
 async def create_company(company_in: CompanyCreate, db: AsyncSession = Depends(get_db)):
     data = company_in.model_dump()
-    # Convert HttpUrl to string for SQLite compatibility
-    if data.get("linkedin_url"):
-        data["linkedin_url"] = str(data["linkedin_url"])
-    if data.get("website"):
-        data["website"] = str(data["website"])
     company = Company(**data)
     db.add(company)
     try:
@@ -86,11 +81,6 @@ async def update_company(company_id: int, company_in: CompanyUpdate, db: AsyncSe
         raise HTTPException(status_code=404, detail="Company not found")
 
     data = company_in.model_dump(exclude_unset=True)
-    # Convert HttpUrl to string for SQLite compatibility
-    if data.get("linkedin_url"):
-        data["linkedin_url"] = str(data["linkedin_url"])
-    if data.get("website"):
-        data["website"] = str(data["website"])
 
     for field, value in data.items():
         setattr(company, field, value)
